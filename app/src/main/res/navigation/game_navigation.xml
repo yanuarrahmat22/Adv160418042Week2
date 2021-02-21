@@ -10,15 +10,24 @@
         android:name="com.example.adv160418042week2.MainFragment"
         android:label="Main Screen"
         tools:layout="@layout/fragment_main" >
-        <action android:id="@+id/actionGameFragment" />
+        <action
+            android:id="@+id/actionResultFragment"
+            app:destination="@id/resultFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
-        android:id="@+id/gameFragment"
+        android:id="@+id/resultFragment"
         android:name="com.example.adv160418042week2.GameFragment"
-        android:label="Game Screen"
-        tools:layout="@layout/fragment_game" >
+        android:label="Result Screen"
+        tools:layout="@layout/fragment_result">
         <action
             android:id="@+id/actionMainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
+        <argument
+            android:name="playerScore"
+            app:argType="integer" />
     </fragment>
 </navigation>

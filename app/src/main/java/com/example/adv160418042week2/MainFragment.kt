@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import kotlinx.android.synthetic.main.fragment_main.*
+import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +31,36 @@ class MainFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var score = 0
+        var num1 =  Random.nextInt(0,100)
+        txtNum1.text = num1.toString()
+        var num2 =  Random.nextInt(0,100)
+        txtNum2.text = num2.toString()
+        var answer = num1 + num2
+
+        btnStart.setOnClickListener {
+            val answerUser = txtAnswer.text.toString()
+            if (answer == answerUser.toInt())
+            {
+                score+=1
+                num1 =  Random.nextInt(0,100)
+                txtNum1.text = num1.toString()
+                num2 =  Random.nextInt(0,100)
+                txtNum2.text = num2.toString()
+                answer = num1 + num2
+            }
+            else
+            {
+                val action = MainFragmentDirections.actionResultFragment(score)
+                Navigation.findNavController(it).navigate(action)
+            }
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
